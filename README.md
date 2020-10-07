@@ -30,7 +30,7 @@ Saisir n;
 LasommeDu_n = 0;
 for i in range(1,n)
   LasommeDu_n = LasommeDu_n + i;
-fin for
+fin for 
 // affiche LasommeDu_n
 ---
  
