@@ -26,6 +26,7 @@ B = n+10;
 for i in range(n,B)
   #affiche i
 # 6) A partir d’un nombre (positif) donné la somme de tous les entiers jusqu’à ce nombre
+//
 Saisir n;
 LasommeDu_n = 0;
 for i in range(1,n)
