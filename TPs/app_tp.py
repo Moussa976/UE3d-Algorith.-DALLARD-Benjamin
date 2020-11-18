@@ -5,6 +5,9 @@ import os
 #Mon répertoire local
 #st.write(os.getcwd())
 
+import seaborn as sns
+
+
 
 def main():
 	""" Explorateur des jeux de données """
@@ -60,7 +63,11 @@ def main():
 
 	#* Afficher plusieurs type de graphique dans une partie visualisation avec notamment : 
 	#	* Une heatmap des corrélations avec Matplotlib et Seaborn (avec les valeurs annotés)
+	if st.checkbox("Corrélation avec Seaborn"):
+		st.write(sns.heatmap(data.corr(),annot=True))
+		st.pyplot()
 	#   * Un graphique en barres afin de visualiser la taille du dataset par caractéristiques (on pourra notamment grouper les données afin d’avoir des graphiques plus précis)
+
 	#​
 	#* Sélectionner le type de graphique à tracer
 
