@@ -55,6 +55,8 @@ def main():
 			st.write(data.shape)
 
 	#* Afficher les statistiques descriptives du dataset
+	if st.checkbox("Les statistiques descriptives du dataset"):
+		st.write(data.describe().T)
 
 
 	#* Afficher plusieurs type de graphique dans une partie visualisation avec notamment : 
