@@ -58,7 +58,6 @@ def main():
 	if st.checkbox("Les statistiques descriptives du dataset"):
 		st.write(data.describe().T)
 
-
 	#* Afficher plusieurs type de graphique dans une partie visualisation avec notamment : 
 	#	* Une heatmap des corrélations avec Matplotlib et Seaborn (avec les valeurs annotés)
 	#   * Un graphique en barres afin de visualiser la taille du dataset par caractéristiques (on pourra notamment grouper les données afin d’avoir des graphiques plus précis)
@@ -66,7 +65,7 @@ def main():
 	#* Sélectionner le type de graphique à tracer
 
 	#* Sélectionner des colonnes dans le jeux de données afin de générer le graphique
-	#* (bonus)À noter que suivant certain jeux de données il y aura des graphiques qui n’auront pas de sens capturez les dans des exceptions ��
+	#* (bonus)À noter que suivant certain jeux de données il y aura des graphiques qui n’auront pas de sens capturez les dans des exceptions
  
 
 if __name__ == '__main__':
