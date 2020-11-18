@@ -25,12 +25,33 @@ def main():
 
     # On charge le ficher
 	data = pd.read_csv(filename)
-	# Affichage du dataset
+
+	#* Afficher le dataset chargé suivant un nombre de ligne entrées par l’utilisateur
 	if st.checkbox("Afficher le dataset :"):
 		number = st.number_input("Choisir le nombre de ligne")
-
 		st.write(data.head(number))
 
+	#* Afficher le nom des colonnes du dataset 
+	if st.checkbox("Afficher les noms des colonnes"):
+		st.write(data.columns)
+
+	#* Afficher le type des colonnes du dataset ainsi que les colonnes sélectionnées 
+
+
+	#* La shape du dataset, par lignes et par colonnes
+
+
+	#* Afficher les statistiques descriptives du dataset
+
+
+	#* Afficher plusieurs type de graphique dans une partie visualisation avec notamment : 
+	#	* Une heatmap des corrélations avec Matplotlib et Seaborn (avec les valeurs annotés)
+	#   * Un graphique en barres afin de visualiser la taille du dataset par caractéristiques (on pourra notamment grouper les données afin d’avoir des graphiques plus précis)
+	#​
+	#* Sélectionner le type de graphique à tracer
+
+	#* Sélectionner des colonnes dans le jeux de données afin de générer le graphique
+	#* (bonus)À noter que suivant certain jeux de données il y aura des graphiques qui n’auront pas de sens capturez les dans des exceptions ��
     
 
 if __name__ == '__main__':
