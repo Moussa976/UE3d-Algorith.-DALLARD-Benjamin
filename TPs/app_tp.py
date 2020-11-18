@@ -2,52 +2,55 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
-#
-os.getcwd()
+#Mon répertoire local
+#st.write(os.getcwd())
 
-st.title('Bonjour')
 
-@st.cache
-def get_UN_data():
-    AWS_BUCKET_URL = "https://streamlit-demo-data.s3-us-west-2.amazonaws.com"
-    df = pd.read_csv(AWS_BUCKET_URL + "/agri.csv.gz")
-    return df.set_index("Region")
+def main():
+	""" Explorateur des jeux de données """
+	st.title("Explorateur des jeux de données")
+	st.subheader("Exploration des données")
 
-try:
-    df = get_UN_data()
-except urllib.error.URLError as e:
-    st.error(
-        """
-        **This demo requires internet access.**
+	def file_selector(folder_path='.\mesdatasets'):
+        # Liste des fichiers csv dans le répertoire mesdatesets
+		filenames = os.listdir(folder_path)
+		selected_filename = st.selectbox("Séléctionner un fichier de données",filenames)
+        
+		return os.path.join(folder_path,selected_filename) # Construction de noms de chemins
 
-        Connection error: %s
-    """
-        % e.reason
-    )
-    return
+    # Le fichier sélectionné
+	filename = file_selector()
+    # Message qui informe le fichier sélectionné
+	st.info("Vous avez sélectionné {}".format(filename))
 
-countries = st.multiselect(
-    "Choose countries", list(df.index), ["China", "United States of America"]
-)
-if not countries:
-    st.error("Please select at least one country.")
-    return
+    # On charge le ficher
+	data = pd.read_csv(filename)
+	# Affichage du dataset
+	if st.checkbox("Afficher le dataset :"):
+		number = st.number_input("Choisir le nombre de ligne")
 
-data = df.loc[countries]
-data /= 1000000.0
-st.write("### Gross Agricultural Production ($B)", data.sort_index())
+		st.write(data.head(number))
 
-data = data.T.reset_index()
-data = pd.melt(data, id_vars=["index"]).rename(
-    columns={"index": "year", "value": "Gross Agricultural Product ($B)"}
-)
-chart = (
-    alt.Chart(data)
-    .mark_area(opacity=0.3)
-    .encode(
-        x="year:T",
-        y=alt.Y("Gross Agricultural Product ($B):Q", stack=None),
-        color="Region:N",
-    )
-)
-st.altair_chart(chart, use_container_width=True)
+    
+
+if __name__ == '__main__':
+    main()
+    
+# # st.title('Bonjour')
+
+# DATA_URL = ('netflix_titles.csv')
+
+# def load_data(nrows):
+#     data = pd.read_csv(DATA_URL, nrows=nrows)
+#     lowercase = lambda x: str(x).lower()
+#     data.rename(lowercase, axis='columns', inplace=True)
+#     return data
+
+# # Create a text element and let the reader know the data is loading.
+# data_load_state = st.text('Chargement des données...')
+# # Load 10,000 rows of data into the dataframe.
+# data = load_data(10000)
+# # Notify the reader that the data was successfully loaded.
+# data_load_state.text('Chargement des données ... terminé!')
+
+# st.write(data)
