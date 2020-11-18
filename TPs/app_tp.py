@@ -27,7 +27,7 @@ def main():
 	data = pd.read_csv(filename)
 
 	#* Afficher le dataset chargé suivant un nombre de ligne entrées par l’utilisateur
-	if st.checkbox("Afficher le dataset :"):
+	if st.checkbox("Afficher le dataset"):
 		number = st.number_input("Choisir le nombre de ligne")
 		st.write(data.head(number))
 
@@ -36,10 +36,14 @@ def main():
 		st.write(data.columns)
 
 	#* Afficher le type des colonnes du dataset ainsi que les colonnes sélectionnées 
-
+	if st.checkbox("Sélectionner les colonnes à afficher"):
+		lescolonnes = data.columns.tolist()
+		colonne_selectionnee = st.multiselect("Select",lescolonnes)
+		new_data = data[colonne_selectionnee]
+		st.dataframe(new_data)
 
 	#* La shape du dataset, par lignes et par colonnes
-
+	
 
 	#* Afficher les statistiques descriptives du dataset
 
@@ -52,7 +56,8 @@ def main():
 
 	#* Sélectionner des colonnes dans le jeux de données afin de générer le graphique
 	#* (bonus)À noter que suivant certain jeux de données il y aura des graphiques qui n’auront pas de sens capturez les dans des exceptions ��
-    
+    if st.button("Thanks"):
+        st.balloons()
 
 if __name__ == '__main__':
     main()
