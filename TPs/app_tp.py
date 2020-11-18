@@ -34,7 +34,7 @@ def main():
 	#* Afficher le dataset chargé suivant un nombre de ligne entrées par l’utilisateur
 	if st.checkbox("Afficher le dataset"):
 		number = st.number_input("Choisir le nombre de ligne")
-		st.write(data.head(number))
+		st.dataframe(data.head(number))
 
 	#* Afficher le nom des colonnes du dataset 
 	if st.checkbox("Afficher les noms des colonnes"):
@@ -84,8 +84,31 @@ def main():
 			st.pyplot()
 	#​
 	#* Sélectionner le type de graphique à tracer
-
+	all_columns_names = data.columns.tolist()
+	type_of_plot = st.selectbox("Sélectionnez le type de graphique",["area","bar","line","hist","box","kde"])
+	selected_columns_names = st.multiselect("Sélectionnez les colonnes à tracer",all_columns_names)
 	#* Sélectionner des colonnes dans le jeux de données afin de générer le graphique
+	if st.button("Généré un graphique"):
+		st.success("Génération d'un tracé personnalisable de {} pour {}".format(type_of_plot,selected_columns_names))
+
+		# Graphique par Streamlit
+		if type_of_plot == 'area':
+			cust_data = data[selected_columns_names]
+			st.area_chart(cust_data)
+
+		elif type_of_plot == 'bar':
+			cust_data = data[selected_columns_names]
+			st.bar_chart(cust_data)
+
+		elif type_of_plot == 'line':
+			cust_data = data[selected_columns_names]
+			st.line_chart(cust_data)
+
+		# Graphique personnalisé
+		elif type_of_plot:
+			cust_plot= data[selected_columns_names].plot(kind=type_of_plot)
+			st.write(cust_plot)
+			st.pyplot()
 	#* (bonus)À noter que suivant certain jeux de données il y aura des graphiques qui n’auront pas de sens capturez les dans des exceptions
  
 
