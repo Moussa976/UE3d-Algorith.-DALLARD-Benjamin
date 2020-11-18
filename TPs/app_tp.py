@@ -7,6 +7,8 @@ import os
 
 import seaborn as sns
 
+import matplotlib.pyplot as plt 
+%matplotlib inline
 
 
 def main():
@@ -67,7 +69,19 @@ def main():
 		st.write(sns.heatmap(data.corr(),annot=True))
 		st.pyplot()
 	#   * Un graphique en barres afin de visualiser la taille du dataset par caractéristiques (on pourra notamment grouper les données afin d’avoir des graphiques plus précis)
-
+	if st.checkbox("Graphique des comptes de valeur"):
+		st.text("Comptes de valeur par cible")
+		all_columns_names = data.columns.tolist()
+		premiere_col = st.selectbox("Première colonne à GroupBy",all_columns_names)
+		selected_columns_names = st.multiselect("Colonne(s) à sélectionner",all_columns_names)
+		if st.button("Graphique"):
+			st.text("Générer un Graphique")
+			if selected_columns_names:
+				vc_plot = data.groupby(premiere_col)[selected_columns_names].count()
+			else:
+				vc_plot = data.iloc[:,-1].value_counts()
+			st.write(vc_plot.plot(kind="bar"))
+			st.pyplot()
 	#​
 	#* Sélectionner le type de graphique à tracer
 
