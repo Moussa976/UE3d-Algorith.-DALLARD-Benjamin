@@ -38,12 +38,21 @@ def main():
 	#* Afficher le type des colonnes du dataset ainsi que les colonnes sélectionnées 
 	if st.checkbox("Sélectionner les colonnes à afficher"):
 		lescolonnes = data.columns.tolist()
-		colonne_selectionnee = st.multiselect("Select",lescolonnes)
+		colonne_selectionnee = st.multiselect("Sélection(s) : ",lescolonnes)
 		new_data = data[colonne_selectionnee]
 		st.dataframe(new_data)
 
 	#* La shape du dataset, par lignes et par colonnes
-	
+	if st.checkbox("La shape du dataset"):
+		data_dim = st.radio("Afficher la dimension par ",("Lignes","Colonnes"))
+		if data_dim == 'Lignes':
+			st.text("Nombre de lignes")
+			st.write(data.shape[0])
+		elif data_dim == 'Colonnes':
+			st.text("Nombre de colonnes")
+			st.write(data.shape[1])
+		else:
+			st.write(data.shape)
 
 	#* Afficher les statistiques descriptives du dataset
 
@@ -56,8 +65,7 @@ def main():
 
 	#* Sélectionner des colonnes dans le jeux de données afin de générer le graphique
 	#* (bonus)À noter que suivant certain jeux de données il y aura des graphiques qui n’auront pas de sens capturez les dans des exceptions ��
-    if st.button("Thanks"):
-        st.balloons()
+ 
 
 if __name__ == '__main__':
     main()
