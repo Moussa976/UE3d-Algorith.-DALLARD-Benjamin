@@ -15,14 +15,19 @@
 
 <body>
   <div class="jumbotron ">
-    <h1 class="text-center">Les données</h1>
+    <h1 class="text-center">{{title}} </h1>
     <div class="container">
       <ul class="list-group">
         {% if data %}
           <li class="list-group-item"><strong>Id : </strong> {{ data.id }} </li>
           <li class="list-group-item"><strong>Titre : </strong>  {{ data.titre }}</li>
         {% else %}
+          {% if datatitre %}
+            <li class="list-group-item"><strong>Id : </strong> {{ datatitre.id }} </li>
+            <li class="list-group-item"><strong>Titre : </strong>  {{ datatitre.titre }}</li>
+          {% else %}
           <h5>Aucune donnée</h5>
+          {% endif %}
         {% endif %}
       </ul>
     </div>
