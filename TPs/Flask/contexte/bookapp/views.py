@@ -28,7 +28,7 @@ def lebookbyid(id=None):
 
 @app.route('/api/books/titre/<titre>',methods=['GET'])
 def lebookbytitre(titre=None):
-        letitre = str(titre)
+        letitre = titre
         book=[{'titre':1,'titre' : 'un titre',},{'titre':2,'titre': 'un autre titre random',}]
 
         if(letitre == 'un titre'):
